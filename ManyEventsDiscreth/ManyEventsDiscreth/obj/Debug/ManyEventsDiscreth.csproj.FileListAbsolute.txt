@@ -1,0 +1,10 @@
+C:\Users\Артём\source\repos\ManyEventsDiscreth\ManyEventsDiscreth\bin\Debug\ManyEventsDiscreth.exe.config
+C:\Users\Артём\source\repos\ManyEventsDiscreth\ManyEventsDiscreth\bin\Debug\ManyEventsDiscreth.exe
+C:\Users\Артём\source\repos\ManyEventsDiscreth\ManyEventsDiscreth\bin\Debug\ManyEventsDiscreth.pdb
+C:\Users\Артём\source\repos\ManyEventsDiscreth\ManyEventsDiscreth\obj\Debug\ManyEventsDiscreth.csprojAssemblyReference.cache
+C:\Users\Артём\source\repos\ManyEventsDiscreth\ManyEventsDiscreth\obj\Debug\ManyEventsDiscreth.Form1.resources
+C:\Users\Артём\source\repos\ManyEventsDiscreth\ManyEventsDiscreth\obj\Debug\ManyEventsDiscreth.Properties.Resources.resources
+C:\Users\Артём\source\repos\ManyEventsDiscreth\ManyEventsDiscreth\obj\Debug\ManyEventsDiscreth.csproj.GenerateResource.cache
+C:\Users\Артём\source\repos\ManyEventsDiscreth\ManyEventsDiscreth\obj\Debug\ManyEventsDiscreth.csproj.CoreCompileInputs.cache
+C:\Users\Артём\source\repos\ManyEventsDiscreth\ManyEventsDiscreth\obj\Debug\ManyEventsDiscreth.exe
+C:\Users\Артём\source\repos\ManyEventsDiscreth\ManyEventsDiscreth\obj\Debug\ManyEventsDiscreth.pdb
