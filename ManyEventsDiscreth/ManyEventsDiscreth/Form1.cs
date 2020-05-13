@@ -30,64 +30,22 @@ namespace ManyEventsDiscreth
 
         private void CalculateBtn_Click(object sender, EventArgs e)
         {
-            float chi = 11.07f;
+            
             init();
             if (check())
             {
                 StatPanel.Visible = true;
-                double A = 0;
-                int k = 0;
-                float M = 0, D = 0, Derror = 0, Merror = 0, Chi_square = 0;
-                for (int i = 0; i < numericUpDown1.Value; i++)
-                {
-                    A = rnd.NextDouble();
-                    k = 0;
-                    foreach (var value in values)
-                    {
-                        A -= value;
-                        if (A<=0)
-                        {
-                            Count[k]++;
-                            break;
-                        }
-                        k++;
-                    }
-                }
+                
+                
 
+                filler();
                 for (int i = 0; i < 5; i++)
                 {
                     chart1.Series[0].Points.AddXY(i, Count[i] / numericUpDown1.Value);
                 }
 
-
-                for (int i = 0; i < 5; i++)
-                {
-                    M += (Count[i] / (float)numericUpDown1.Value) * (i+1);
-                    Merror += values[i] * (i + 1);
-
-                    D += (Count[i] / (float)numericUpDown1.Value) * (i + 1) * (i + 1);
-                    Derror += values[i] * (i + 1) * (i + 1);
-
-                    Chi_square += ((Count[i] * Count[i]) / ((float)numericUpDown1.Value * values[i]));
-                }
-                Chi_square -= (float)numericUpDown1.Value;
-                D -= M * M;
-                Derror -= Merror * Merror;
-                VarianceLbl.Text = D.ToString();
-                AverageLbl.Text = M.ToString();
-                ErrAvgLbl.Text = (Math.Abs((M - Merror)/Math.Abs(Merror))).ToString();
-                ErrVarLbl.Text = (Math.Abs((D - Derror)/Math.Abs(Derror))).ToString();
-                Chi1Lbl.Text = Chi_square.ToString();
-                Chi2Lbl.Text = "11.07";
-
-                if (Chi_square > chi)
-                {
-                    BoolLbl.Text = "true";
-                }
-                else
-                {
-                    BoolLbl.Text = "false";
-                }
+                counter();
+                
                 for (int i = 0; i < 5; i++)
                 {
                     Count[i] = 0;
@@ -131,6 +89,62 @@ namespace ManyEventsDiscreth
             values.Add(float.Parse(textBox5.Text, CultureInfo.InvariantCulture.NumberFormat));
 
             
+        }
+
+        void filler()
+        {
+            double A = 0;
+            int k = 0;
+
+            for (int i = 0; i < numericUpDown1.Value; i++)
+            {
+                A = rnd.NextDouble();
+                k = 0;
+                foreach (var value in values)
+                {
+                    A -= value;
+                    if (A <= 0)
+                    {
+                        Count[k]++;
+                        break;
+                    }
+                    k++;
+                }
+            }
+        }
+
+        void counter()
+        {
+            
+            float M = 0, D = 0, Derror = 0, Merror = 0, Chi_square = 0, chi = 11.07f;
+            for (int i = 0; i < 5; i++)
+            {
+                M += (Count[i] / (float)numericUpDown1.Value) * (i + 1);
+                Merror += values[i] * (i + 1);
+
+                D += (Count[i] / (float)numericUpDown1.Value) * (i + 1) * (i + 1);
+                Derror += values[i] * (i + 1) * (i + 1);
+
+                Chi_square += ((Count[i] * Count[i]) / ((float)numericUpDown1.Value * values[i]));
+            }
+            Chi_square -= (float)numericUpDown1.Value;
+            D -= M * M;
+            Derror -= Merror * Merror;
+            VarianceLbl.Text = D.ToString();
+            AverageLbl.Text = M.ToString();
+            ErrAvgLbl.Text = (Math.Abs((M - Merror) / Math.Abs(Merror))).ToString();
+            ErrVarLbl.Text = (Math.Abs((D - Derror) / Math.Abs(Derror))).ToString();
+            Chi1Lbl.Text = Chi_square.ToString();
+            Chi2Lbl.Text = "11.07";
+
+            if (Chi_square > chi)
+            {
+                BoolLbl.Text = "true";
+            }
+            else
+            {
+                BoolLbl.Text = "false";
+            }
         }
     }
 }
