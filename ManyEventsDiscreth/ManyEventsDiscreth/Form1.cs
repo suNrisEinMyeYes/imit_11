@@ -20,7 +20,7 @@ namespace ManyEventsDiscreth
         public Form1()
         {
             InitializeComponent();
-            chart1.ChartAreas[0].AxisX.Maximum = 1;
+            
             chart1.ChartAreas[0].AxisX.Minimum = 0;
             chart1.ChartAreas[0].AxisX.IntervalOffset = 0;
             chart1.ChartAreas[0].AxisX.Interval = 0;
@@ -30,7 +30,7 @@ namespace ManyEventsDiscreth
 
         private void CalculateBtn_Click(object sender, EventArgs e)
         {
-            
+            float chi = 11.07f;
             init();
             if (check())
             {
@@ -53,15 +53,20 @@ namespace ManyEventsDiscreth
                         k++;
                     }
                 }
-                
 
                 for (int i = 0; i < 5; i++)
                 {
-                    M += (Count[i] / (float)numericUpDown1.Value) * values[i];
-                    Merror = Count[i] * values[i];
+                    chart1.Series[0].Points.AddXY(i, Count[i] / numericUpDown1.Value);
+                }
 
-                    D += (Count[i] / (float)numericUpDown1.Value) * values[i] * values[i];
-                    Derror = Count[i] * values[i] * values[i];
+
+                for (int i = 0; i < 5; i++)
+                {
+                    M += (Count[i] / (float)numericUpDown1.Value) * (i+1);
+                    Merror += values[i] * (i + 1);
+
+                    D += (Count[i] / (float)numericUpDown1.Value) * (i + 1) * (i + 1);
+                    Derror += values[i] * (i + 1) * (i + 1);
 
                     Chi_square += ((Count[i] * Count[i]) / ((float)numericUpDown1.Value * values[i]));
                 }
@@ -73,7 +78,16 @@ namespace ManyEventsDiscreth
                 ErrAvgLbl.Text = (Math.Abs((M - Merror)/Math.Abs(Merror))).ToString();
                 ErrVarLbl.Text = (Math.Abs((D - Derror)/Math.Abs(Derror))).ToString();
                 Chi1Lbl.Text = Chi_square.ToString();
-                Chi2Lbl.Text = "11.070";
+                Chi2Lbl.Text = "11.07";
+
+                if (Chi_square > chi)
+                {
+                    BoolLbl.Text = "true";
+                }
+                else
+                {
+                    BoolLbl.Text = "false";
+                }
                 for (int i = 0; i < 5; i++)
                 {
                     Count[i] = 0;
@@ -93,13 +107,7 @@ namespace ManyEventsDiscreth
             }
             if (SumToCheck == 1f)
             {
-                var x = 0.1;
-                foreach (var value in values)
-                {
-
-                    chart1.Series[0].Points.AddXY(x, value);
-                    x += 0.2;
-                }
+                
                 return true;
             }
             else
